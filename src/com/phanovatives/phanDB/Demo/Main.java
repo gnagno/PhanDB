@@ -1,7 +1,6 @@
 package com.phanovatives.phanDB.Demo;
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 
 import com.phanovatives.phanDB.*;
 
