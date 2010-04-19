@@ -16,7 +16,7 @@ public class Main extends Activity {
         
         
         // Create table
-        Table tTask = db.create_table("tasks");        
+        Table tTask = db.create_table("tasks");
         tTask.create_column("name1",		"varchar(255)");
         tTask.create_column("created_at1",	"varchar(255)");
         tTask.create_column("updated_at1",	"varchar(255)");                
@@ -30,44 +30,20 @@ public class Main extends Activity {
 
         db.save();
         
+        tTask.find_all(null, null, null, null, null);
+        
         
         // Add some data
-        tTask.columns.get(0).value="blah";
-        tTask.columns.get(1).value="01";
-        tTask.columns.get(2).value="02";        
-        tTask.create_record();
-        tTask.save();
+        tTask.set_column("name1", "lolo");
+        tTask.set_column("created_at1", "1");
+        tTask.set_column("updated_at1", "2");        
+        tTask.create_record(true);
         
-        // Add some data
-        tTags.columns.get(0).value="blah";
-        tTags.columns.get(1).value="11";
-        tTags.columns.get(2).value="12";        
-        tTags.create_record();
-        tTags.save();
         
-
+        tTask.find_all(null, null, null, null, null);
         
-        /***********************************************************************/
-        /*for (int i=0;i<db.tables.size();i++){
-        	Table t=db.tables.get(i);
-        	Log.d("<Table>",t.name);
-        	
-        	for (int j=0;j<t.columns.size();j++){
-        		Column col=t.columns.get(j);
-        		Log.d("======<Column>",col.name);
-        	}
-        	
-        	
-        	for (int j=0;j<t.records.size();j++){
-        		Record rec=t.records.get(j);        		
-        		Log.d("======<Record>",rec.toString());
-        		for (int k=0;k<rec.columns.size();k++){
-        			Log.d("======<Column NAME>",rec.columns.get(k).name);
-        			Log.d("======<Column VALUE>" ,rec.columns.get(k).value);
-        		}
-        	}        	
-        }*/
-        /***********************************************************************/
+        db.print();
+        db.close();
     }
     
     
