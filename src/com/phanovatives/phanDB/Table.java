@@ -1,9 +1,7 @@
 package com.phanovatives.phanDB;
 import java.util.ArrayList;
-
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 public class Table{
     /*********************************************************************/    
@@ -11,7 +9,6 @@ public class Table{
     public ArrayList<Column>     columns      = new ArrayList<Column>();
     
     public 	String 			name;
-    public 	boolean 		debug=true;
     private SQLiteDatabase 	database;
     /*********************************************************************/    
     public Table(SQLiteDatabase db,String strName){
@@ -76,16 +73,16 @@ public class Table{
     		// Get the current record
     		Record record=records.get(j);
     		
-    		if (debug){
+    		if (Settings.getDebug()){
     			for (Column col: record.columns){
-    				Log.d("<phanDB-Columns>",col.name);
+    				Settings.Log("<phanDB-Columns>",col.name);
     			}
     		}
     		
     		// Sync only records that were not saved: doesn't have id yet
     		if (record.columns.get(0).value==null){
-        		if (debug)
-        			Log.d("<PhanDB-Record>",record.toString());
+        		if (Settings.getDebug())
+        			Settings.Log("<PhanDB-Record>",record.toString());
         		
         		for (int k=0;k<record.columns.size();k++){
         			Column col=record.columns.get(k);
@@ -93,9 +90,11 @@ public class Table{
         			if (col.name.equals("id")){
         				// Do nothing
         			}else{
-            			if (debug){
-                			Log.d("<PhanDB-Column NAME>"	,	col.name);
-                			Log.d("<PhanDB-Column VALUE>" ,	col.value);    				
+            			if (Settings.getDebug()){
+            				if (col.name!=null)
+            					Settings.Log("<PhanDB-Column NAME>"	,	col.name);
+                			if (col.value!=null)
+                				Settings.Log("<PhanDB-Column VALUE>" ,	col.value);    				
             			}
             			
             			// Build column name list
@@ -115,10 +114,10 @@ public class Table{
         		strSQL=strSQL + "(" + strColumnNames + ")";
         		strSQL=strSQL + " values(" + strColumnValues + ");";
         		
-        		if (debug){
-        			Log.d("<PhanDB-ColumnNames>",strColumnNames);
-        			Log.d("<PhanDB-ColumnValues>",strColumnValues);
-        			Log.d("<PhanDB-SQL>",strSQL);
+        		if (Settings.getDebug()){
+        			Settings.Log("<PhanDB-ColumnNames>",strColumnNames);
+        			Settings.Log("<PhanDB-ColumnValues>",strColumnValues);
+        			Settings.Log("<PhanDB-SQL>",strSQL);
         		}
         		database.execSQL(strSQL);
         		record.columns.get(0).value="saved";

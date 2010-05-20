@@ -3,17 +3,14 @@
  */
 package com.phanovatives.phanDB;
 import java.util.ArrayList;
-
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
-import android.util.Log;
 
 public class DataBase {
     /*********************************************************************/    
     public ArrayList<Table>     tables      = new ArrayList<Table>();
     public String name;
     public SQLiteDatabase database;
-    public boolean debug=true;
     /*********************************************************************/    
     public DataBase(Context ctx,String strName){
         name=strName;
@@ -31,6 +28,14 @@ public class DataBase {
     	return table;
     }
     /*********************************************************************/
+    public Table get_table(String strName){
+    	for (Table table:tables){
+    		if (table.name.equals(strName))
+    			return table;
+    	}
+    	return null;
+    }
+    /*********************************************************************/
     public void save(){
     	    	
         for (int i=0;i<tables.size();i++){
@@ -42,8 +47,8 @@ public class DataBase {
         	// Init SQL string
         	String strSQL="create table if not exists "+table.name+"(";
         	
-        	if (debug)
-        		Log.d("<phanDB-Table>",table.name);
+        	if (Settings.getDebug())
+        		Settings.Log("<phanDB-Table>",table.name);
         	
         	// Loop thru all columns
         	for (int j=0;j<table.columns.size();j++){
@@ -58,8 +63,8 @@ public class DataBase {
         			strSQL=strSQL + ",";
         		}
         		
-        		if (debug)
-        			Log.d("<phanDB-Column>",col.name);
+        		if (Settings.getDebug())
+        			Settings.Log("<phanDB-Column>",col.name);
         	}
         	// Finalize the SQL string
         	strSQL=strSQL+");";
@@ -67,19 +72,19 @@ public class DataBase {
         	//Execute the SQL String        	
         	database.execSQL(strSQL);
         	
-        	if (debug)
-        		Log.d("<phanDB-SQL>",strSQL);
+        	if (Settings.getDebug())
+        		Settings.Log("<phanDB-SQL>",strSQL);
         }    	
     }
     /*********************************************************************/
     public void print(){
         for (Table table:tables){
-        	Log.d("<Table>",table.name);        	
+        	Settings.Log("<Table>",table.name);        	
         	for (Record record:table.records){        		
-        		Log.d("======<Record>",record.toString());
+        		Settings.Log("======<Record>",record.toString());
         		for (Column col:record.columns){
-        			Log.d("======<Column NAME>",		col.name);
-        			Log.d("======<Column VALUE>",	col.value);
+        			Settings.Log("======<Column NAME>",		col.name);
+        			Settings.Log("======<Column VALUE>",	col.value);
         		}
         	}        	
         }
