@@ -6,6 +6,7 @@ Model your database into objects to simplify database programming.
 
 HOW TO USE:
 
+<code class="java">
 package com.phanovatives.phanDB.Demo;
 import android.app.Activity;
 import android.os.Bundle;
@@ -58,3 +59,4 @@ public class Main extends Activity {
     	public String name;
     }
 }
+</code>
