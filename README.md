@@ -1,12 +1,11 @@
-OVERVIEW:
-
+### OVERVIEW
 Wrap around classes for Android SQLite database.
 Simplify database implementation, eliminate the need of using SQL in your code.
 Model your database into objects to simplify database programming.
 
-HOW TO USE:
-<pre>
-<code class="java">
+### HOW TO USE
+
+```java
 package com.phanovatives.phanDB.Demo;
 import android.app.Activity;
 import android.os.Bundle;
@@ -59,5 +58,4 @@ public class Main extends Activity {
     	public String name;
     }
 }
-</code>
-</pre>
+```
