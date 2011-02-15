@@ -5,7 +5,7 @@ Simplify database implementation, eliminate the need of using SQL in your code.
 Model your database into objects to simplify database programming.
 
 HOW TO USE:
-
+<pre>
 <code class="java">
 package com.phanovatives.phanDB.Demo;
 import android.app.Activity;
@@ -60,3 +60,4 @@ public class Main extends Activity {
     }
 }
 </code>
+</pre>
